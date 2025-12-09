@@ -93,7 +93,7 @@ if __name__ == "__main__":
         print("Build Complete!")
         print(f"Vocabulary size: {len(vocab):,}")
         print(f"Embedding dimensions: {embeddings.shape}")
-        print(f"⏱Total build time: {elapsed/60:.3f} minutes")
+        print(f"⏱Total build time: {elapsed:.3f} seconds")
 
     except Exception as e:
         print("Error: Failed to build vocabulary or embeddings.")
