@@ -20,8 +20,10 @@ class ContextGame:
         # Initialize embedding of secret word
         secret_vector = self.embeddings[self.secret_idx]
 
-        # Compute similarity of of secret vector with all other words in the vocabulary
+        # Compute cosine similarity of of secret vector with all other words in the vocabulary
+        # It is okay to use @ here since vector norms are all normalized to 1
         similarities = self.embeddings @ secret_vector
+        # Get indices of terms sorted by cosine similarity in descending order
         order = np.argsort(-similarities)
         self.rank = {i: rank for rank, i in enumerate(order)}
 
@@ -72,7 +74,7 @@ def run_game() -> None:
     game_start = time.time()
 
     while True:
-        user_guess = input("Please enter your guess: ").strip()
+        user_guess = input("Please enter your guess: ").lower().strip()
 
         if not user_guess.isalpha():
             print("Please enter a valid word (alphabetic strings only).")
